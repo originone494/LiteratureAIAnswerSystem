@@ -1,0 +1,23 @@
+{
+  "title": "LLM-Enhanced Topic Identification for Scientific and Technical Literature",
+  "authors": [
+    "Wen Xiaobo",
+    "Yao Changqing",
+    "Gao Yingfan"
+  ],
+  "abstract": "[目的/意义] 为了将大语言模型 (Large Language Models, LLMs) 强大的分析能力运用于科技文献主题识别任务,解决 LLMs 在识别大量文献主题中存在的缺陷的同时提高主流主题识别方法在复杂科技文献主题识别中的性能,提出了使用LLMs增强主流主题识别的方法。[方法/过程] 在主题识别过程中利用LLMs的主题识别能力, 通过文本精炼、对比学习表示优化和主题解释与再划分的增强方式对主流主题识别方法LDA和BERTopic进行改进。[结果/结论] 在生物特征识别专利数据集中将 LDA 和 BERTopic 的识别效果相对增强前各平均提升了 20% 和 29.7%,其中增强后的 BERTopic 相较于完全基于LLMs的主题识别方法TopicGPT提升了36.7%。[局限] 未能充分探讨提示词工程和上下文学习对LLMs识别科技文献主题的提升效果,同时测试的模型与数据相对有限。",
+  "keywords": [
+    "大语言模型",
+    "主题识别",
+    "科技文献",
+    "自然语言处理",
+    "对比学习"
+  ],
+  "article_id": "",
+  "doi": "10.16353/j.",
+  "journal": "",
+  "received_date": "",
+  "revised_date": "",
+  "accepted_date": "",
+  "fund": ""
+}

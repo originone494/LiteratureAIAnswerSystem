@@ -1,0 +1,23 @@
+{
+  "title": "Analysis of rain attenuation effects on K-band satellite communication systems",
+  "authors": [
+    "LI Shuangli",
+    "XIAN Yongshuai",
+    "WANG Yuran"
+  ],
+  "abstract": "降雨衰减是引起K频段高频电磁波星地链路传输损耗的重要因素,基于国际电信联盟(ITU)推荐的经典模型 ITU-R P.618-11, 对 K 频段星地链路的降雨衰减进行预测分析。利用软件编程, 针对中国境内的 6 个典型地区, 计算了静止卫星轨道位置在 \\( {100}^{ \\circ  }\\mathrm{E} \\) 和 \\( {120}^{ \\circ  }\\mathrm{E} \\) 、频率为 \\( {20}\\mathrm{{GHz}} \\) 和 \\( {25}\\mathrm{{GHz}} \\) 时的降雨衰减值。分析了我国东部地区和西部内陆地区的降雨衰减差异,归纳总结了卫星通信系统的抗雨衰对策,研究结果为卫星通信地面站在相关地区的数据传输、测量控制等工作提供了理论依据。",
+  "keywords": [
+    "K频段",
+    "星地链路",
+    "降雨衰减",
+    "ITU-R模型",
+    "卫星通信"
+  ],
+  "article_id": "1672-0164(2026)02-0032-04",
+  "doi": "",
+  "journal": "",
+  "received_date": "2025",
+  "revised_date": "2025",
+  "accepted_date": "",
+  "fund": ""
+}

@@ -1,0 +1,25 @@
+{
+  "title": "Design and implementation of large language model retrieval-augmented generation-based computer network experiment course QA system",
+  "authors": [
+    "ZHANG Lijun",
+    "LIU Si",
+    "LIAO Jitong",
+    "GAO Yulu",
+    "HAN He",
+    "ZHANG Liang",
+    "LIU Yanfang"
+  ],
+  "abstract": "基于大模型检索增强生成的计算机网络实验课程问答系统的设计与实现, 主要包括大语言模型、外挂知识库与规范性检测系统, 通过大语言模型的通用性提供高度定制化的回答, 通过外挂知识库实现数据条目的精细化管理,通过规范性检测系统保证系统的健壮性。还设计了微信小程序,用于信息展示与用户交互,提升系统的可用性。课堂问答测试结果表明,该系统能够准确回答学生遇到的问题,同时拒绝回答不合理、不安全的内容。 该系统应用范围广、响应速度快、回答性能好,是大语言模型与实验课程教学相融合的成功尝试。",
+  "keywords": [
+    "大语言模型",
+    "课程问答系统",
+    "检索增强生成"
+  ],
+  "article_id": "1002-4956(2024)12-0186-07",
+  "doi": "",
+  "journal": "",
+  "received_date": "2024-07-26",
+  "revised_date": "",
+  "accepted_date": "",
+  "fund": ""
+}

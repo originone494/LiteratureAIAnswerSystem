@@ -1,0 +1,19 @@
+{
+  "title": "The Beam Hopping Pattern Design Algorithm of Low Earth Orbit Satellite Communication System",
+  "authors": [
+    "SHI Huipeng GUO Ding MU Ruishuo ZHONG LI Fangyuan"
+  ],
+  "abstract": "低轨卫星资源调度是长时间的连续资源分配过程, 这一过程中低轨卫星保持高速移动, 跳波束图案的设计需要考虑星地链路的切换。针对这种切换, 即卫星覆盖区域间的服务目标迁移, 所导致的多星资源联合调度需求, 该文提出一种资源自适应权衡分配的多星联合跳波束图案设计算法。该算法通过设计星间联合调度框架和多星联合调度权重,将多星资源联合分配问题转化为星座内单星资源调度问题,轻量化设计跳波束图案。经过与多种权重设计方法的对比验证, 仿真结果表明, 所提算法的轻量化设计思路合理, 并且可以有效地保障受迁移影响区域内小区的服务质量,可为低轨卫星系统长时资源调度设计提供参考。",
+  "keywords": [
+    "低轨卫星通信系统",
+    "跳波束",
+    "资源分配策略"
+  ],
+  "article_id": "1009-5896(2025)03-0612-11",
+  "doi": "",
+  "journal": "",
+  "received_date": "2024-07-15",
+  "revised_date": "",
+  "accepted_date": "",
+  "fund": ""
+}

@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>科技文献智能问答系统</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#e2e2e9",
+                        "on-surface-variant": "#5f5f61",
+                        "on-secondary-fixed": "#3d3f45",
+                        "on-primary-fixed": "#393f4c",
+                        "background": "#fcf8f9",
+                        "outline": "#7b7a7d",
+                        "tertiary-fixed-dim": "#cbc9e9",
+                        "surface-container-high": "#eae7ea",
+                        "on-background": "#323235",
+                        "outline-variant": "#b3b1b4",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#fe8983",
+                        "surface-container-low": "#f6f3f4",
+                        "surface-container-highest": "#e4e2e5",
+                        "on-primary": "#f6f7ff",
+                        "secondary": "#5d5f65",
+                        "secondary-container": "#e2e2e9",
+                        "error-dim": "#4e0309",
+                        "tertiary-container": "#d9d7f8",
+                        "on-secondary-container": "#505257",
+                        "surface-tint": "#585e6b",
+                        "primary": "#585e6b",
+                        "secondary-dim": "#515359",
+                        "on-primary-fixed-variant": "#555c69",
+                        "secondary-fixed-dim": "#d3d4db",
+                        "tertiary": "#5d5c78",
+                        "on-error-container": "#752121",
+                        "inverse-surface": "#0e0e0f",
+                        "tertiary-fixed": "#d9d7f8",
+                        "on-tertiary-fixed": "#383751",
+                        "on-surface": "#323235",
+                        "surface-variant": "#e4e2e5",
+                        "on-tertiary-fixed-variant": "#54546f",
+                        "primary-fixed": "#dde2f2",
+                        "on-error": "#fff7f6",
+                        "on-secondary": "#f8f8ff",
+                        "on-tertiary": "#fbf7ff",
+                        "primary-fixed-dim": "#cfd4e4",
+                        "surface-bright": "#fcf8f9",
+                        "on-primary-container": "#4c525f",
+                        "on-secondary-fixed-variant": "#5a5b61",
+                        "surface-dim": "#dbd9dd",
+                        "primary-container": "#dde2f2",
+                        "on-tertiary-container": "#4a4a65",
+                        "error": "#9f403d",
+                        "inverse-on-surface": "#9e9c9d",
+                        "primary-dim": "#4c535f",
+                        "tertiary-dim": "#51516c",
+                        "inverse-primary": "#e5ebfb",
+                        "surface-container": "#f0edef",
+                        "surface": "#fcf8f9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+        
+        /* 加载动画 */
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+        }
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: #5d5f65;
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out both;
+        }
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        
+        .paper-card { transition: all 0.3s ease; }
+        .paper-card:hover { background: #f6f3f4; }
+        .paper-card.selected { background: #dde2f2; border-left: 4px solid #585e6b; }
+        
+        /* Markdown 样式 */
+        .markdown-content h1 { font-size: 1.5rem; font-weight: 700; margin-top: 1rem; margin-bottom: 0.5rem; }
+        .markdown-content h2 { font-size: 1.25rem; font-weight: 600; margin-top: 0.875rem; margin-bottom: 0.5rem; }
+        .markdown-content h3 { font-size: 1.125rem; font-weight: 600; margin-top: 0.75rem; margin-bottom: 0.5rem; }
+        .markdown-content h4, .markdown-content h5, .markdown-content h6 { font-weight: 600; margin-top: 0.5rem; margin-bottom: 0.25rem; }
+        .markdown-content p { margin-bottom: 0.75rem; }
+        .markdown-content ul, .markdown-content ol { margin-left: 1.25rem; margin-bottom: 0.75rem; }
+        .markdown-content ul { list-style-type: disc; }
+        .markdown-content ol { list-style-type: decimal; }
+        .markdown-content li { margin-bottom: 0.25rem; }
+        .markdown-content code { background: #e4e2e5; padding: 0.125rem 0.375rem; border-radius: 0.25rem; font-size: 0.875rem; font-family: monospace; }
+        .markdown-content pre { background: #323235; color: #fcf8f9; padding: 0.875rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 0.75rem; }
+        .markdown-content pre code { background: transparent; padding: 0; color: inherit; }
+        .markdown-content blockquote { border-left: 4px solid #585e6b; padding-left: 0.875rem; margin-left: 0; margin-bottom: 0.75rem; color: #5f5f61; }
+        .markdown-content a { color: #585e6b; text-decoration: underline; }
+        .markdown-content a:hover { opacity: 0.8; }
+        .markdown-content table { border-collapse: collapse; width: 100%; margin-bottom: 0.75rem; }
+        .markdown-content th, .markdown-content td { border: 1px solid #b3b1b4; padding: 0.5rem; text-align: left; }
+        .markdown-content th { background: #e4e2e5; }
+        .markdown-content hr { border: none; border-top: 1px solid #b3b1b4; margin: 1rem 0; }
+        .markdown-content img { max-width: 100%; height: auto; border-radius: 0.5rem; margin: 0.75rem 0; display: block; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .markdown-content img + em { display: block; text-align: center; color: #5f5f61; font-size: 0.875rem; margin-top: -0.5rem; margin-bottom: 0.75rem; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex overflow-hidden">
+    <!-- SideNavBar 侧边栏 -->
+    <aside class="h-screen w-72 flex-col fixed left-0 top-0 hidden lg:flex bg-slate-50 flex flex-col gap-4 p-6 border-r border-slate-100 z-40">
+        <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary">science</span>
+            </div>
+            <div>
+                <h1 class="text-lg font-bold text-slate-900 leading-none">文献问答</h1>
+                <p class="text-[10px] text-on-surface-variant tracking-wider uppercase mt-1">AI 智能助手</p>
+            </div>
+        </div>
+        
+        <!-- 新建对话按钮 -->
+        <button onclick="createNewConversation()" class="w-full py-3 px-4 bg-primary text-on-primary rounded-xl font-semibold flex items-center justify-center gap-2 mb-6 hover:opacity-90 transition-all shadow-sm">
+            <span class="material-symbols-outlined text-sm">add</span>
+            新建对话
+        </button>
+        
+        <!-- 对话列表 -->
+        <nav class="flex-1 overflow-y-auto flex flex-col gap-1 pr-2" id="conversationList">
+            <!-- 对话列表将在这里渲染 -->
+        </nav>
+        
+        <!-- 前往知识库按钮 -->
+        <div class="pt-4 border-t border-slate-100">
+            <a href="/kb" class="w-full py-3 px-4 bg-secondary-container text-on-secondary-container rounded-xl text-sm font-semibold flex items-center justify-center gap-2 hover:bg-secondary-fixed transition-all">
+                <span class="material-symbols-outlined text-sm">auto_stories</span>
+                前往知识库
+            </a>
+        </div>
+    </aside>
+
+    <!-- 主内容区域 -->
+    <main class="flex-1 lg:ml-72 flex flex-col h-screen relative bg-surface">
+        <!-- 顶部导航 -->
+        <header class="w-full sticky top-0 z-50 bg-white/80 backdrop-blur-xl shadow-sm flex justify-between items-center w-full px-6 py-4">
+            <div class="flex items-center gap-4">
+                <button class="lg:hidden w-10 h-10 flex items-center justify-center text-on-surface-variant" onclick="toggleMobileSidebar()">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <h2 class="text-lg font-semibold text-on-background" id="currentConversationTitle">新对话</h2>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="text-sm text-on-surface-variant" id="selectedPapersInfo">使用全部文献</span>
+            </div>
+        </header>
+
+        <!-- 主内容区 -->
+        <section class="flex-1 flex overflow-hidden">
+            <!-- 聊天区域 -->
+            <div class="flex-1 flex flex-col">
+                <!-- 消息列表 -->
+                <div class="flex-1 overflow-y-auto p-6 space-y-6" id="messageList">
+                    <!-- 消息将在这里渲染 -->
+                </div>
+                
+                <!-- 输入区域 -->
+                <div class="p-4 border-t border-outline-variant">
+                    <div class="bg-surface-container-low rounded-xl p-2 focus-within:ring-2 focus-within:ring-primary-container transition-all flex items-center gap-2">
+                        
+                        <input 
+                            type="text" 
+                            id="userInput" 
+                            placeholder="问一个关于你的文献的问题..."
+                            class="flex-1 bg-transparent border-none focus:ring-0 text-on-background py-3 px-2"
+                            onkeypress="if(event.key === 'Enter') sendMessage()"
+                        >
+                        <button onclick="sendMessage()" id="sendBtn" class="bg-primary from-primary to-primary-container text-on-primary w-10 h-10 rounded-xl flex items-center justify-center shadow-sm hover:opacity-90 active:scale-95 transition-all">
+                            <span class="material-symbols-outlined">send</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧文献选择面板 -->
+            <aside class="w-96 bg-surface-container-low border-l border-outline-variant hidden xl:flex flex-col p-6 overflow-hidden">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="font-bold text-on-background">选择文献</h2>
+                    <div class="flex gap-2">
+                        <button onclick="selectAllPapers()" class="text-xs text-primary hover:underline">全选</button>
+                        <button onclick="deselectAllPapers()" class="text-xs text-on-surface-variant hover:underline">取消</button>
+                    </div>
+                </div>
+                
+                <div class="flex-1 overflow-y-auto space-y-3 pr-1" id="paperSelectionList">
+                    <!-- 文献列表将在这里渲染 -->
+                </div>
+                
+                <div class="mt-4 pt-4 border-t border-outline-variant">
+                    <button onclick="saveSelectedPapers()" class="w-full py-3 bg-primary-container text-on-primary-container rounded-xl text-sm font-semibold flex items-center justify-center gap-2 hover:bg-primary-fixed transition-all">
+                        <span class="material-symbols-outlined text-sm">save</span>
+                        保存选择
+                    </button>
+                </div>
+            </aside>
+        </section>
+
+        <!-- 移动端底部导航 -->
+        <nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 bg-white/90 backdrop-blur-lg lg:hidden z-50 shadow-2xl rounded-t-3xl border-t border-slate-100">
+            <a class="flex flex-col items-center justify-center text-primary px-6 py-2 transition-all active:scale-90" href="#">
+                <span class="material-symbols-outlined">forum</span>
+                <span class="font-['Inter'] text-[10px] uppercase tracking-wider mt-1">对话</span>
+            </a>
+            <a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-2 transition-all active:scale-90" href="/kb">
+                <span class="material-symbols-outlined">auto_stories</span>
+                <span class="font-['Inter'] text-[10px] uppercase tracking-wider mt-1">知识库</span>
+            </a>
+        </nav>
+    </main>
+
+    <script>
+        // 全局状态
+        let currentSessionId = null;
+        let conversations = [];
+        let papers = {};
+        let selectedPapers = [];
+        let isLoading = false;
+
+        // ================== 初始化 ==================
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadConversations();
+            await loadPapers();
+            
+            if (conversations.length > 0) {
+                switchConversation(conversations[0].session_id);
+            } else {
+                await createNewConversation();
+            }
+        });
+
+        // ================== 对话管理 ==================
+        async function loadConversations() {
+            try {
+                const res = await fetch('/api/conversations');
+                const data = await res.json();
+                if (data.success) {
+                    conversations = data.conversations;
+                    renderConversationList();
+                }
+            } catch (err) {
+                console.error('加载对话失败', err);
+            }
+        }
+
+        async function createNewConversation() {
+            try {
+                const res = await fetch('/api/conversation/new', { method: 'POST' });
+                const data = await res.json();
+                if (data.success) {
+                    await loadConversations();
+                    switchConversation(data.session_id);
+                }
+            } catch (err) {
+                console.error('创建对话失败', err);
+            }
+        }
+
+        async function switchConversation(sessionId) {
+            currentSessionId = sessionId;
+            try {
+                const res = await fetch(`/api/conversation/${sessionId}`);
+                const data = await res.json();
+                console.log('========== 加载历史对话 ==========');
+                console.log('对话数据:', data);
+                if (data.messages) {
+                    data.messages.forEach((msg, index) => {
+                        console.log(`消息 ${index + 1} [${msg.role}]:`, msg.content);
+                    });
+                }
+                console.log('=================================');
+                if (data.success) {
+                    renderMessages(data.messages);
+                    selectedPapers = data.selected_papers || [];
+                    renderPaperSelectionList();
+                    updateSelectedPapersInfo();
+                    
+                    // 更新选中状态
+                    const conv = conversations.find(c => c.session_id === sessionId);
+                    document.getElementById('currentConversationTitle').textContent = conv ? conv.title : '新对话';
+                    
+                    renderConversationList();
+                }
+            } catch (err) {
+                console.error('加载对话失败', err);
+            }
+        }
+
+        async function deleteConversation(sessionId, event) {
+            event.stopPropagation();
+            if (!confirm('确定要删除这个对话吗？')) return;
+            
+            try {
+                const res = await fetch(`/api/conversation/${sessionId}/delete`, { method: 'DELETE' });
+                const data = await res.json();
+                if (data.success) {
+                    await loadConversations();
+                    if (currentSessionId === sessionId) {
+                        if (conversations.length > 0) {
+                            switchConversation(conversations[0].session_id);
+                        } else {
+                            await createNewConversation();
+                        }
+                    }
+                }
+            } catch (err) {
+                console.error('删除对话失败', err);
+            }
+        }
+
+        function renderConversationList() {
+            const list = document.getElementById('conversationList');
+            list.innerHTML = conversations.map(conv => {
+                const isSelected = conv.session_id === currentSessionId;
+                return `
+                    <div 
+                        onclick="switchConversation('${conv.session_id}')"
+                        class="flex items-center gap-3 px-3 py-3 rounded-lg cursor-pointer transition-all ${isSelected ? 'bg-white text-primary shadow-sm' : 'text-on-surface-variant hover:translate-x-1 duration-200'}"
+                    >
+                        <span class="material-symbols-outlined text-xl">${isSelected ? 'forum' : 'chat_bubble_outline'}</span>
+                        <div class="flex-1 min-w-0">
+                            <p class="font-medium text-sm truncate">${conv.title}</p>
+                            <p class="text-xs text-on-surface-variant">${conv.modified_time}</p>
+                        </div>
+                        <button 
+                            onclick="deleteConversation('${conv.session_id}', event)"
+                            class="p-1 text-on-surface-variant hover:text-error transition-colors opacity-0 hover:opacity-100"
+                        >
+                            <span class="material-symbols-outlined text-sm">delete</span>
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ================== 消息管理 ==================
+        function renderMessages(messages) {
+            const list = document.getElementById('messageList');
+            list.innerHTML = messages.map(msg => {
+                const isUser = msg.role === 'user';
+                return `
+                    <div class="flex gap-4 max-w-3xl ${isUser ? 'ml-auto flex-row-reverse' : ''}">
+                        <div class="w-10 h-10 rounded-xl flex-shrink-0 flex items-center justify-center ${isUser ? 'bg-primary-container' : 'bg-tertiary-container'}">
+                            <span class="material-symbols-outlined ${isUser ? 'text-primary' : 'text-tertiary'}" style="font-variation-settings: 'FILL' 1;">
+                                ${isUser ? 'person' : 'smart_toy'}
+                            </span>
+                        </div>
+                        <div class="${isUser ? 'bg-primary text-on-primary' : 'bg-surface-container-low text-on-background'} p-5 rounded-2xl ${isUser ? 'rounded-tr-none' : 'rounded-tl-none'} shadow-sm max-w-[80%]">
+                            <div class="text-sm leading-relaxed ${isUser ? '' : 'markdown-content'}">${formatMessage(msg.content, isUser)}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // 滚动到底部
+            list.scrollTop = list.scrollHeight;
+            
+            // 处理图片加载
+            processImages();
+        }
+
+        function formatMessage(content, isUser) {
+            if (isUser) {
+                // 用户消息不渲染 Markdown，保持原样
+                return content.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
+            }
+            // AI 消息使用 marked 渲染 Markdown
+            return marked.parse(content);
+        }
+
+        async function processImages() {
+            // 等待DOM更新
+            await new Promise(resolve => setTimeout(resolve, 10));
+            
+            // 查找所有图片元素
+            const images = document.querySelectorAll('.markdown-content img');
+            
+            images.forEach(async (img) => {
+                const originalSrc = img.getAttribute('src');
+                const alt = img.getAttribute('alt');
+                
+                console.log('处理图片:', { originalSrc, alt });
+                
+                // 如果路径已经是 /Files/ 开头，跳过
+                if (originalSrc && originalSrc.startsWith('/Files/')) {
+                    return;
+                }
+                
+                // 提取文件名
+                let filename = '';
+                if (originalSrc) {
+                    const parts = originalSrc.split('/');
+                    filename = parts[parts.length - 1];
+                }
+                
+                if (!filename && alt) {
+                    // 尝试从 alt 中提取（如果 alt 就是文件名）
+                    filename = alt;
+                }
+                
+                if (filename) {
+                    try {
+                        // 调用API查找图片
+                        const response = await fetch(`/api/find-image/${encodeURIComponent(filename)}`);
+                        const data = await response.json();
+                        
+                        if (data.success) {
+                            console.log('找到图片路径:', data.path);
+                            img.setAttribute('src', data.path);
+                            
+                            // 添加加载动画
+                            img.style.opacity = '0';
+                            img.onload = () => {
+                                img.style.transition = 'opacity 0.3s';
+                                img.style.opacity = '1';
+                            };
+                        } else {
+                            console.log('未找到图片:', filename);
+                        }
+                    } catch (error) {
+                        console.error('查找图片失败:', error);
+                    }
+                }
+            });
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            if (!message || isLoading || !currentSessionId) return;
+            
+            input.value = '';
+            isLoading = true;
+            
+            // 显示用户消息和加载状态
+            const list = document.getElementById('messageList');
+            list.innerHTML += `
+                <div class="flex gap-4 max-w-3xl ml-auto flex-row-reverse">
+                    <div class="w-10 h-10 rounded-xl bg-primary-container flex-shrink-0 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">person</span>
+                    </div>
+                    <div class="bg-primary text-on-primary p-5 rounded-2xl rounded-tr-none shadow-sm max-w-[80%]">
+                        <div class="text-sm leading-relaxed">${message}</div>
+                    </div>
+                </div>
+                <div class="flex gap-4 max-w-3xl" id="loadingIndicator">
+                    <div class="w-10 h-10 rounded-xl bg-tertiary-container flex-shrink-0 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+                    </div>
+                    <div class="bg-surface-container-low text-on-background p-5 rounded-2xl rounded-tl-none shadow-sm">
+                        <div class="typing-indicator">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            list.scrollTop = list.scrollHeight;
+            
+            // 自动保存选中的文献
+            try {
+                await fetch(`/api/conversation/${currentSessionId}/selected_papers`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ selected_papers: selectedPapers })
+                });
+            } catch (err) {
+                console.error('保存文献失败', err);
+            }
+            
+            try {
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        session_id: currentSessionId,
+                        message: message
+                    })
+                });
+                
+                const data = await res.json();
+                console.log('========== 模型回答 ==========');
+                console.log('完整响应数据:', data);
+                if (data.messages && data.messages.length > 0) {
+                    const lastMessage = data.messages[data.messages.length - 1];
+                    if (lastMessage.role === 'assistant' || lastMessage.role === 'ai') {
+                        console.log('AI 回答内容:', lastMessage.content);
+                    }
+                }
+                console.log('=================================');
+                if (data.success) {
+                    renderMessages(data.messages);
+                    await loadConversations();
+                } else {
+                    alert('发送失败: ' + (data.error || '未知错误'));
+                }
+            } catch (err) {
+                console.error('发送失败', err);
+                alert('发送失败，请检查网络');
+            } finally {
+                isLoading = false;
+            }
+        }
+
+        // ================== 文献管理 ==================
+        async function loadPapers() {
+            try {
+                const res = await fetch('/api/papers');
+                const data = await res.json();
+                if (data.success) {
+                    papers = data.papers;
+                    renderPaperSelectionList();
+                }
+            } catch (err) {
+                console.error('加载文献失败', err);
+            }
+        }
+
+        function renderPaperSelectionList() {
+            const list = document.getElementById('paperSelectionList');
+            const paperNames = Object.keys(papers);
+            
+            if (paperNames.length === 0) {
+                list.innerHTML = `
+                    <div class="text-center py-12 text-on-surface-variant">
+                        <span class="material-symbols-outlined text-4xl mb-3">library_books</span>
+                        <p>知识库暂无文献</p>
+                        <a href="/kb" class="text-primary text-sm underline mt-2 inline-block">去知识库管理添加</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            list.innerHTML = paperNames.map(name => {
+                const paper = papers[name];
+                const meta = paper.metadata || {};
+                const title = meta.title || name;
+                const authors = meta.authors || [];
+                const isSelected = selectedPapers.includes(name);
+                
+                return `
+                    <div 
+                        onclick="togglePaperSelection('${name}')"
+                        class="paper-card bg-white border border-outline-variant rounded-xl p-4 cursor-pointer ${isSelected ? 'selected' : ''}"
+                    >
+                        <div class="flex items-start gap-3">
+                            <input type="checkbox" ${isSelected ? 'checked' : ''} class="mt-1" onclick="event.stopPropagation()">
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="material-symbols-outlined text-primary text-sm">picture_as_pdf</span>
+                                    <span class="text-xs text-primary font-medium">PDF</span>
+                                </div>
+                                <p class="font-semibold text-on-background text-sm line-clamp-2">${title}</p>
+                                ${authors.length > 0 ? `<p class="text-xs text-on-surface-variant mt-1">${authors.slice(0, 2).join(', ')}${authors.length > 2 ? '...' : ''}</p>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function togglePaperSelection(paperName) {
+            if (selectedPapers.includes(paperName)) {
+                selectedPapers = selectedPapers.filter(p => p !== paperName);
+            } else {
+                selectedPapers.push(paperName);
+            }
+            renderPaperSelectionList();
+            updateSelectedPapersInfo();
+        }
+
+        function selectAllPapers() {
+            selectedPapers = Object.keys(papers);
+            renderPaperSelectionList();
+            updateSelectedPapersInfo();
+        }
+
+        function deselectAllPapers() {
+            selectedPapers = [];
+            renderPaperSelectionList();
+            updateSelectedPapersInfo();
+        }
+
+        async function saveSelectedPapers() {
+            if (!currentSessionId) return;
+            
+            try {
+                const res = await fetch(`/api/conversation/${currentSessionId}/selected_papers`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ selected_papers: selectedPapers })
+                });
+                
+                const data = await res.json();
+                if (data.success) {
+                    alert('保存成功！');
+                }
+            } catch (err) {
+                console.error('保存失败', err);
+                alert('保存失败');
+            }
+        }
+
+        function updateSelectedPapersInfo() {
+            const info = document.getElementById('selectedPapersInfo');
+            if (selectedPapers.length > 0) {
+                info.textContent = `已选 ${selectedPapers.length} 篇文献`;
+                info.className = 'text-sm text-primary font-medium';
+            } else {
+                info.textContent = '使用全部文献';
+                info.className = 'text-sm text-on-surface-variant';
+            }
+        }
+
+        // ================== 移动端 ==================
+        function toggleMobileSidebar() {
+            // 移动端侧边栏切换
+            alert('移动端侧边栏');
+        }
+    </script>
+</body>
+</html>

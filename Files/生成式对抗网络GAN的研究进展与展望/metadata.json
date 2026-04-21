@@ -1,0 +1,17 @@
+{
+  "title": "Generative Adversarial Networks: The State of the Art and Beyond",
+  "authors": [
+    "WANG Kun-Feng GOU Chao DUAN Yan-Jie LIN Yi-Lun"
+  ],
+  "abstract": "生成式对抗网络 GAN (Generative adversarial networks) 目前已经成为人工智能学界一个热门的研究方向. GAN 的基本思想源自博弈论的二人零和博弈, 由一个生成器和一个判别器构成, 通过对抗学习的方式来训练. 目的是估测数据样本的潜在分布并生成新的数据样本. 在图像和视觉计算、语音和语言处理、信息安全、棋类比赛等领域, GAN 正在被广泛研究, 具有巨大的应用前景. 本文概括了 GAN 的研究进展, 并进行展望. 在总结了 GAN 的背景、理论与实现模型、应用领域、优缺点及发展趋势之后,本文还讨论了 GAN 与平行智能的关系,认为 GAN 可以深化平行系统的虚实互动、交互一体的理念,特别是计算实验的思想, 为 ACP (Artificial societies, computational experiments, and parallel execution) 理论提供了十分具体和丰富的算法支持.",
+  "keywords": [
+    "生成式对抗网络, 生成式模型, 零和博弈, 对抗学习, 平行智能, ACP 方法"
+  ],
+  "article_id": "",
+  "doi": "",
+  "journal": "",
+  "received_date": "",
+  "revised_date": "",
+  "accepted_date": "",
+  "fund": ""
+}

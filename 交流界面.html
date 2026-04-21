@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cognitive Gallery | Research HQ</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#e2e2e9",
+                        "on-surface-variant": "#5f5f61",
+                        "on-secondary-fixed": "#3d3f45",
+                        "on-primary-fixed": "#393f4c",
+                        "background": "#fcf8f9",
+                        "outline": "#7b7a7d",
+                        "tertiary-fixed-dim": "#cbc9e9",
+                        "surface-container-high": "#eae7ea",
+                        "on-background": "#323235",
+                        "outline-variant": "#b3b1b4",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#fe8983",
+                        "surface-container-low": "#f6f3f4",
+                        "surface-container-highest": "#e4e2e5",
+                        "on-primary": "#f6f7ff",
+                        "secondary": "#5d5f65",
+                        "secondary-container": "#e2e2e9",
+                        "error-dim": "#4e0309",
+                        "tertiary-container": "#d9d7f8",
+                        "on-secondary-container": "#505257",
+                        "surface-tint": "#585e6b",
+                        "primary": "#585e6b",
+                        "secondary-dim": "#515359",
+                        "on-primary-fixed-variant": "#555c69",
+                        "secondary-fixed-dim": "#d3d4db",
+                        "tertiary": "#5d5c78",
+                        "on-error-container": "#752121",
+                        "inverse-surface": "#0e0e0f",
+                        "tertiary-fixed": "#d9d7f8",
+                        "on-tertiary-fixed": "#383751",
+                        "on-surface": "#323235",
+                        "surface-variant": "#e4e2e5",
+                        "on-tertiary-fixed-variant": "#54546f",
+                        "primary-fixed": "#dde2f2",
+                        "on-error": "#fff7f6",
+                        "on-secondary": "#f8f8ff",
+                        "on-tertiary": "#fbf7ff",
+                        "primary-fixed-dim": "#cfd4e4",
+                        "surface-bright": "#fcf8f9",
+                        "on-primary-container": "#4c525f",
+                        "on-secondary-fixed-variant": "#5a5b61",
+                        "surface-dim": "#dbd9dd",
+                        "primary-container": "#dde2f2",
+                        "on-tertiary-container": "#4a4a65",
+                        "error": "#9f403d",
+                        "inverse-on-surface": "#9e9c9d",
+                        "primary-dim": "#4c535f",
+                        "tertiary-dim": "#51516c",
+                        "inverse-primary": "#e5ebfb",
+                        "surface-container": "#f0edef",
+                        "surface": "#fcf8f9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex overflow-hidden">
+<!-- SideNavBar Component -->
+<aside class="h-screen w-72 flex-col fixed left-0 top-0 hidden lg:flex bg-slate-50 dark:bg-slate-950 flex flex-col gap-4 p-6 border-r border-slate-100 dark:border-slate-800 z-40">
+<div class="flex items-center gap-3 mb-8">
+<div class="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="science">science</span>
+</div>
+<div>
+<h1 class="text-lg font-bold text-slate-900 dark:text-white leading-none">Research HQ</h1>
+<p class="text-[10px] text-on-surface-variant tracking-wider uppercase mt-1">AI Synthesis Mode</p>
+</div>
+</div>
+<button class="w-full py-3 px-4 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-xl font-semibold flex items-center justify-center gap-2 mb-6 hover:opacity-90 transition-all shadow-sm">
+<span class="material-symbols-outlined text-sm" data-icon="upload_file">upload_file</span>
+            Upload Document
+        </button>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-sm rounded-lg flex items-center gap-3 px-4 py-3 hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="space_dashboard">space_dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 flex items-center gap-3 px-4 py-3 hover:text-blue-600 dark:hover:text-blue-300 transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="font-medium">Library</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 flex items-center gap-3 px-4 py-3 hover:text-blue-600 dark:hover:text-blue-300 transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="font-medium">Analytics</span>
+</a>
+<a class="text-slate-500 dark:text-slate-400 flex items-center gap-3 px-4 py-3 hover:text-blue-600 dark:hover:text-blue-300 transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-slate-100 dark:border-slate-800 pt-6">
+<a class="text-slate-500 dark:text-slate-400 flex items-center gap-3 px-4 py-3 hover:text-error transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-medium">Log Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas Area -->
+<main class="flex-1 lg:ml-72 flex flex-col h-screen relative bg-surface">
+<!-- TopNavBar Component -->
+<header class="w-full sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm dark:shadow-none flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-6 flex-1">
+<div class="lg:hidden w-10 h-10 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</div>
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary-container" placeholder="Search insights or documents..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-100/50 dark:hover:bg-slate-800/50 transition-colors">
+<span class="material-symbols-outlined text-slate-500" data-icon="help_outline">help_outline</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-100/50 dark:hover:bg-slate-800/50 transition-colors">
+<span class="material-symbols-outlined text-slate-500" data-icon="settings">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary-fixed">
+<img alt="Researcher Avatar" class="w-full h-full object-cover" data-alt="Professional headshot of a male researcher with glasses in a modern office setting with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFwv7QqX0Hz3ppNlq5jmfnk0bSUZ4UbPat9OOcmaXGjZvdJlNtnz2sJtZd4ZqKEE9nlBh09wePMIfTVKac8LF2AS2U9rZXY862UlT3Jw4anlOBbriU_PGSA2LAG6fRaomppjjeti_YpduOv9FEPQMhBebKSKJcZF76VUSZXEzvbZ0S-FzUQX935aZDXFyy75KdPiFxyjn99zH4b89GlxVfSlQoHIphNj0qncokSWr0Fg-DTJ31oNT2kIT0mxXQeJ_h7f8vTOpU2Fo"/>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<section class="flex-1 flex overflow-hidden">
+<!-- Chat Interface -->
+<div class="flex-1 flex flex-col p-6 overflow-hidden">
+<div class="flex-1 overflow-y-auto pr-4 space-y-8 scroll-smooth">
+<!-- AI Welcome -->
+<div class="flex gap-4 max-w-3xl">
+<div class="w-10 h-10 rounded-xl bg-tertiary-container flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="space-y-4">
+<div class="bg-surface-container-low p-6 rounded-2xl rounded-tl-none shadow-sm">
+<p class="text-on-surface leading-relaxed">Good morning, Dr. Aris. I've analyzed the 3 new papers you uploaded regarding <strong>Neuroplasticity and AI Synthesis</strong>. Would you like a cross-document summary of the methodologies used, or shall we focus on the specific findings in the Harvard study?</p>
+</div>
+</div>
+</div>
+<!-- User Input -->
+<div class="flex gap-4 max-w-3xl ml-auto flex-row-reverse">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+</div>
+<div class="bg-primary text-on-primary p-5 rounded-2xl rounded-tr-none shadow-sm">
+<p class="leading-relaxed">Focus on the findings in the Harvard study, specifically the impact on cognitive load during digital retrieval tasks.</p>
+</div>
+</div>
+<!-- AI Complex Response with Citation Preview -->
+<div class="flex gap-4 max-w-4xl">
+<div class="w-10 h-10 rounded-xl bg-tertiary-container flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="space-y-4 w-full">
+<div class="bg-surface-container-low p-6 rounded-2xl rounded-tl-none border-l-4 border-tertiary shadow-sm">
+<h3 class="font-bold text-lg mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-xl" data-icon="auto_awesome">auto_awesome</span>
+                                    Synthesized Insight
+                                </h3>
+<p class="text-on-surface leading-relaxed mb-6">
+                                    The Harvard study (Chen et al., 2023) indicates a 22% reduction in cognitive load when utilizing semantic gallery interfaces compared to traditional list-based databases. This is attributed to the "Visual Spatial Anchoring" effect where researchers associate data points with specific UI coordinates.
+                                </p>
+<!-- Floating Citation Preview (Glassmorphism) -->
+<div class="bg-surface/80 backdrop-blur-xl p-4 rounded-xl border border-outline-variant/15 shadow-md flex gap-4 items-start max-w-md">
+<div class="w-12 h-16 bg-slate-200 rounded flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-slate-400" data-icon="description">description</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="text-[10px] font-bold text-tertiary uppercase tracking-tighter mb-1">Source Citation</div>
+<div class="text-sm font-bold text-on-surface truncate">Chen_Harvard_Neuro_2023.pdf</div>
+<div class="text-xs text-on-surface-variant">Section 4.2: Cognitive Load Metrics</div>
+</div>
+<button class="text-primary p-1 hover:bg-primary-container rounded-lg transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Chat Input Fixed at Bottom of Main -->
+<div class="pt-6 border-t border-slate-100 dark:border-slate-800">
+<div class="bg-surface-container-low rounded-2xl p-2 focus-within:ring-2 focus-within:ring-primary-container transition-all flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="attach_file">attach_file</span>
+</button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface py-3 px-2" placeholder="Ask a question about your research papers..." type="text"/>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary w-10 h-10 rounded-xl flex items-center justify-center shadow-sm hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Knowledge Base Panel (Right Column) -->
+<aside class="w-96 bg-surface-container-low border-l border-slate-100 dark:border-slate-800 hidden xl:flex flex-col p-6 overflow-hidden">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-bold text-on-surface">Knowledge Base</h2>
+<span class="bg-secondary-container text-on-secondary-container text-[10px] font-bold px-2 py-0.5 rounded-full">12 PAPERS</span>
+</div>
+<div class="flex-1 overflow-y-auto space-y-4 pr-1">
+<!-- Paper Card 1 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl hover:shadow-md transition-shadow group">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="picture_as_pdf">picture_as_pdf</span>
+<span class="text-xs font-bold text-primary tracking-tight">PDF</span>
+</div>
+<div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm" data-icon="download">download</span></button>
+<button class="p-1 text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm" data-icon="visibility">visibility</span></button>
+</div>
+</div>
+<h4 class="font-bold text-sm text-on-surface line-clamp-2 mb-1">Visual Anchoring in High-Density Information Displays</h4>
+<p class="text-xs text-on-surface-variant mb-3">Chen, L., et al (2023)</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-slate-100 text-slate-500 text-[9px] px-2 py-0.5 rounded-full uppercase tracking-widest font-bold">Neuroscience</span>
+<span class="bg-slate-100 text-slate-500 text-[9px] px-2 py-0.5 rounded-full uppercase tracking-widest font-bold">UI Design</span>
+</div>
+</div>
+<!-- Paper Card 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl hover:shadow-md transition-shadow group border-l-4 border-primary">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-500 text-xl" data-icon="article">article</span>
+<span class="text-xs font-bold text-blue-500 tracking-tight">DOCX</span>
+</div>
+<div class="flex gap-1">
+<button class="p-1 text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm" data-icon="download">download</span></button>
+<button class="p-1 text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm" data-icon="visibility">visibility</span></button>
+</div>
+</div>
+<h4 class="font-bold text-sm text-on-surface line-clamp-2 mb-1">The Synthesis Gap: AI-Mediated Literature Reviews</h4>
+<p class="text-xs text-on-surface-variant mb-3">Miller, S. (2024)</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-slate-100 text-slate-500 text-[9px] px-2 py-0.5 rounded-full uppercase tracking-widest font-bold">AI Ethics</span>
+<span class="bg-slate-100 text-slate-500 text-[9px] px-2 py-0.5 rounded-full uppercase tracking-widest font-bold">Academic</span>
+</div>
+</div>
+<!-- Paper Card 3 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl hover:shadow-md transition-shadow group">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="picture_as_pdf">picture_as_pdf</span>
+<span class="text-xs font-bold text-primary tracking-tight">PDF</span>
+</div>
+<div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm" data-icon="download">download</span></button>
+<button class="p-1 text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm" data-icon="visibility">visibility</span></button>
+</div>
+</div>
+<h4 class="font-bold text-sm text-on-surface line-clamp-2 mb-1">Dynamic Graph Synthesis in Scientific Workflows</h4>
+<p class="text-xs text-on-surface-variant mb-3">Zhang, J. (2022)</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-slate-100 text-slate-500 text-[9px] px-2 py-0.5 rounded-full uppercase tracking-widest font-bold">Data Viz</span>
+</div>
+</div>
+</div>
+<div class="mt-6">
+<button class="w-full py-3 bg-secondary-container text-on-secondary-container rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:bg-secondary-fixed transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="auto_stories">auto_stories</span>
+                        View Full Library
+                    </button>
+</div>
+</aside>
+</section>
+<!-- BottomNavBar Component (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg lg:hidden z-50 shadow-2xl rounded-t-3xl border-t border-slate-100 dark:border-slate-800">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-6 py-2 transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="forum">forum</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest mt-1">Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-2xl px-6 py-2 transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest mt-1">Knowledge</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-6 py-2 transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest mt-1">History</span>
+</a>
+</nav>
+</main>
+</body></html>
