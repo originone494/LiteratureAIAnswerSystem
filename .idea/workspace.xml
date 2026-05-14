@@ -2,27 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1625d260-373d-4783-bd90-1e5da4d2f7dc" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/123.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Chat.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tool.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chat_tongyi_deepval.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/check.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config_data.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/delete_chroma_paper.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/embedding_model_deepval.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/file_history_store.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/knowledge_base.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/KnowledgeBase.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pdf_preprocessor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rag.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_evaluate_deepeval_generator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_evaluate_deepeval_retriever.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vector_stores.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/测试API.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat_history/568135ff-0f8e-4928-adf3-cd3a77dbff81.json" beforeDir="false" afterPath="$PROJECT_DIR$/chat_history/568135ff-0f8e-4928-adf3-cd3a77dbff81.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat_history/c37724c7-071a-4500-85cb-3aeb9adf3749.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat_history/c37724c7-071a-4500-85cb-3aeb9adf3749.json.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chroma/046ac9eb-9f31-4200-963a-66428e4fa5be/data_level0.bin" beforeDir="false" afterPath="$PROJECT_DIR$/chroma/046ac9eb-9f31-4200-963a-66428e4fa5be/data_level0.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chroma/046ac9eb-9f31-4200-963a-66428e4fa5be/length.bin" beforeDir="false" afterPath="$PROJECT_DIR$/chroma/046ac9eb-9f31-4200-963a-66428e4fa5be/length.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chroma/chroma.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/chroma/chroma.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rag.py" beforeDir="false" afterPath="$PROJECT_DIR$/rag.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
